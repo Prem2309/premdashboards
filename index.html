@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prem Panchal — Data Science & Technology Portfolio</title>
+  <meta name="description" content="Official 3D Personal Portfolio of Prem Panchal — BCA Data Science Student at Alliance University specializing in Data Analytics, Business Analysis, and Software Development." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for Verified Tech & Contact Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Tailwind CSS CDN & Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              800: '#0f172a',
+              900: '#0b1328',
+              950: '#060a14',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            outfit: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+  
+  <!-- Three.js (WebGL 3D Engine) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="bg-navy-950 text-slate-100 antialiased selection:bg-blue-600 selection:text-white overflow-x-hidden">
+
+  <!-- Interactive 3D WebGL Background Canvas -->
+  <canvas id="webgl-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- Ambient Lighting Effects -->
+  <div class="ambient-glow ambient-top"></div>
+  <div class="ambient-glow ambient-center"></div>
+
+  <!-- Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl bg-navy-950/80 border-b border-slate-800/60" id="main-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero" class="group flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-blue-500/25 group-hover:scale-105 transition-transform duration-300 border border-blue-400/30">
+          PP
+        </div>
+        <div class="flex flex-col">
+          <span class="font-outfit font-bold text-lg text-white tracking-tight group-hover:text-blue-400 transition-colors">Prem Panchal</span>
+          <span class="text-xs text-slate-400 font-mono">BCA Data Science</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#certifications" class="nav-link">Certifications</a>
+        <a href="#leadership" class="nav-link">Beyond Academics</a>
+        <a href="#focus" class="nav-link">What I Bring</a>
+        <a href="#journey" class="nav-link">Project Journey</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="assets/Prem_Panchal_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-secondary text-sm !py-2 !px-3.5" title="View / Download Resume PDF">
+          <i class="fa-solid fa-file-arrow-down text-rose-400"></i>
+          <span>Resume</span>
+        </a>
+        <a href="#contact" class="btn-primary text-sm !py-2 !px-4">
+          <span>Let's Connect</span>
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button id="mobile-menu-btn" aria-label="Toggle navigation menu" class="lg:hidden p-2.5 rounded-lg bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700">
+        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden border-b border-slate-800 bg-navy-950/95 backdrop-blur-2xl px-6 py-5 transition-all duration-300">
+      <div class="flex flex-col gap-3">
+        <a href="#about" class="mobile-nav-link">About Me</a>
+        <a href="#skills" class="mobile-nav-link">Technical Expertise</a>
+        <a href="#projects" class="mobile-nav-link">Project Showcase</a>
+        <a href="#experience" class="mobile-nav-link">Experience & Leadership</a>
+        <a href="#education" class="mobile-nav-link">Academic Journey</a>
+        <a href="#certifications" class="mobile-nav-link">Certifications</a>
+        <a href="#leadership" class="mobile-nav-link">Beyond Academics</a>
+        <a href="#focus" class="mobile-nav-link">What I Bring</a>
+        <a href="#journey" class="mobile-nav-link">Project Journey</a>
+        <a href="assets/Prem_Panchal_Resume.pdf" target="_blank" rel="noopener noreferrer" class="mobile-nav-link text-rose-400 font-semibold flex items-center justify-between">
+          <span>Download Resume (PDF)</span>
+          <i class="fa-solid fa-file-pdf"></i>
+        </a>
+        <a href="#contact" class="mobile-nav-link text-blue-400 font-semibold">Contact Prem</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main class="relative z-10 pt-20">
+
+    <!-- ========================================== -->
+    <!-- SECTION 1: HERO SECTION -->
+    <!-- ========================================== -->
+    <section id="hero" class="relative min-h-[92vh] flex items-center justify-center py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Hero Text & Content (Cols 1-7) -->
+        <div class="lg:col-span-7 flex flex-col items-start text-left space-y-6 animate-fade-in-up">
+          
+          <!-- Professional Status Pill -->
+          <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-blue-950/60 border border-blue-500/30 text-blue-300 text-xs sm:text-sm font-medium shadow-inner shadow-blue-500/10">
+            <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span>
+            <span>Data Science &amp; Technology Portfolio</span>
+          </div>
+
+          <!-- Name & Title -->
+          <div class="space-y-3">
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-outfit font-extrabold tracking-tight text-white leading-tight">
+              Prem <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">Panchal</span>
+            </h1>
+            <p class="text-base sm:text-lg lg:text-xl font-medium text-slate-300 font-outfit leading-snug">
+              BCA Data Science Student | Data Analytics | Business Analysis | Software & Web Development
+            </p>
+          </div>
+
+          <!-- Short Introduction -->
+          <p class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-2xl">
+            "Data-focused and detail-oriented Computer Applications student with hands-on experience in business analysis, data modelling, market research, web development, and data-driven projects. I enjoy transforming data and technology into practical solutions and actionable insights."
+          </p>
+
+          <!-- Professional CTA Buttons -->
+          <div class="flex flex-wrap items-center gap-3.5 pt-2">
+            <a href="#projects" class="btn-primary">
+              <i class="fa-solid fa-laptop-code"></i>
+              <span>Explore My Projects</span>
+            </a>
+            <a href="#skills" class="btn-secondary">
+              <i class="fa-solid fa-microchip"></i>
+              <span>View My Skills</span>
+            </a>
+            <a href="assets/Prem_Panchal_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-secondary !border-rose-500/40 hover:!border-rose-400 group shadow-lg shadow-rose-950/20">
+              <i class="fa-solid fa-file-pdf text-rose-400 group-hover:scale-110 transition-transform"></i>
+              <span>Download Resume</span>
+            </a>
+          </div>
+
+          <!-- Verified Contact & Platform Quick Bar -->
+          <div class="pt-6 border-t border-slate-800/80 w-full">
+            <p class="text-xs uppercase tracking-wider text-slate-500 font-mono mb-3">Connect & Verified Profiles</p>
+            <div class="flex flex-wrap items-center gap-2.5">
+              <a href="assets/Prem_Panchal_Resume.pdf" target="_blank" rel="noopener noreferrer" class="hero-chip !border-rose-500/30 hover:!border-rose-400 text-rose-300" title="View Official Resume PDF">
+                <i class="fa-solid fa-file-pdf text-rose-400"></i>
+                <span>Resume (PDF)</span>
+              </a>
+              <a href="mailto:prempanchal822@gmail.com" class="hero-chip" title="Email Prem Panchal">
+                <i class="fa-solid fa-envelope text-blue-400"></i>
+                <span>prempanchal822@gmail.com</span>
+              </a>
+              <a href="tel:9653461841" class="hero-chip" title="Call Prem Panchal">
+                <i class="fa-solid fa-phone text-emerald-400"></i>
+                <span>9653461841</span>
+              </a>
+              <a href="https://linkedin.com/in/prem-panchal-702230258" target="_blank" rel="noopener noreferrer" class="hero-chip" title="LinkedIn Profile">
+                <i class="fa-brands fa-linkedin text-blue-400"></i>
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://github.com/Prem2309" target="_blank" rel="noopener noreferrer" class="hero-chip" title="GitHub Profile">
+                <i class="fa-brands fa-github text-slate-300"></i>
+                <span>GitHub</span>
+              </a>
+              <a href="https://www.hackerrank.com/prempanchal822" target="_blank" rel="noopener noreferrer" class="hero-chip" title="HackerRank Profile">
+                <i class="fa-brands fa-hackerrank text-emerald-400"></i>
+                <span>HackerRank</span>
+              </a>
+              <a href="https://leetcode.com/prempanchal23" target="_blank" rel="noopener noreferrer" class="hero-chip" title="LeetCode Profile">
+                <i class="fa-solid fa-code text-amber-400"></i>
+                <span>LeetCode</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Hero 3D Interactive Card Showcase (Cols 8-12) -->
+        <div class="lg:col-span-5 relative flex items-center justify-center">
+          <div class="hero-3d-wrapper w-full max-w-md">
+            
+            <!-- 3D Interactive Canvas Container for Hero -->
+            <div id="hero-3d-container" class="relative w-full aspect-square rounded-3xl p-6 glass-card overflow-hidden border border-blue-500/30 shadow-2xl shadow-blue-900/30 flex flex-col justify-between tilt-card">
+              
+              <!-- Subtle Card Header with Terminal Badges -->
+              <div class="flex items-center justify-between z-10">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                  <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                  <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                </div>
+                <span class="text-xs font-mono text-cyan-400/90 bg-cyan-950/60 px-2.5 py-1 rounded-full border border-cyan-800/40 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                  Core Tech Stack
+                </span>
+              </div>
+
+              <!-- Interactive 3D Canvas element rendered by Three.js -->
+              <div class="canvas-3d-slot my-auto relative h-56 flex items-center justify-center">
+                <canvas id="hero-mini-canvas" class="w-full h-full"></canvas>
+                <!-- Central Holo Badge -->
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div class="text-center p-3 rounded-2xl bg-navy-950/70 backdrop-blur-md border border-blue-500/30 shadow-lg">
+                    <div class="text-2xl font-bold font-outfit text-white">Data & AI</div>
+                    <div class="text-[11px] text-blue-300 font-mono">BCA Data Science</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating Core Pillars representing Data Analytics, Python, Databases, Web Dev, ML -->
+              <div class="grid grid-cols-3 gap-2 z-10 pt-2 border-t border-slate-800/60 text-center">
+                <div class="p-2 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-blue-500/40 transition-colors">
+                  <i class="fa-brands fa-python text-blue-400 text-lg mb-1"></i>
+                  <div class="text-[10px] font-mono text-slate-300">Python & ML</div>
+                </div>
+                <div class="p-2 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-colors">
+                  <i class="fa-solid fa-chart-line text-cyan-400 text-lg mb-1"></i>
+                  <div class="text-[10px] font-mono text-slate-300">Analytics</div>
+                </div>
+                <div class="p-2 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-colors">
+                  <i class="fa-solid fa-database text-emerald-400 text-lg mb-1"></i>
+                  <div class="text-[10px] font-mono text-slate-300">Databases</div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 2: ABOUT ME -->
+    <!-- ========================================== -->
+    <section id="about" class="py-24 px-4 sm:px-6 lg:px-8 relative border-t border-slate-800/60">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div class="section-badge">
+            <i class="fa-regular fa-user"></i>
+            <span>Professional Profile</span>
+          </div>
+          <h2 class="section-title">About Me</h2>
+          <p class="section-subtitle">Academic foundations, analytical mindset, and practical technological curiosity.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- 3D Holographic Data Workstation Visual (Cols 1-5) -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative w-full max-w-md aspect-square rounded-3xl glass-card p-6 border border-blue-500/20 shadow-xl tilt-card flex flex-col justify-between overflow-hidden">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span>
+                  <span class="text-xs font-mono text-slate-300">Alliance University, Bengaluru</span>
+                </div>
+                <span class="text-[11px] font-mono text-blue-400">2024 &ndash; 2027</span>
+              </div>
+
+              <!-- 3D Interactive Canvas for About Workstation -->
+              <div class="relative h-48 my-auto flex items-center justify-center">
+                <canvas id="about-3d-canvas" class="w-full h-full"></canvas>
+                <!-- Overlay Visual Elements -->
+                <div class="absolute bottom-1 text-center pointer-events-none">
+                  <span class="text-xs text-slate-400 font-mono bg-navy-950/80 px-3 py-1 rounded-full border border-slate-800">
+                    Data Science & Web Architecture
+                  </span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3 pt-3 border-t border-slate-800">
+                <div class="bg-navy-900/60 p-2.5 rounded-xl border border-slate-800/80">
+                  <div class="text-xs text-slate-400">Degree</div>
+                  <div class="text-sm font-semibold text-white">BCA Data Science</div>
+                </div>
+                <div class="bg-navy-900/60 p-2.5 rounded-xl border border-slate-800/80">
+                  <div class="text-xs text-slate-400">Current CGPA</div>
+                  <div class="text-sm font-semibold text-cyan-400 font-mono">7.67 / 10</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Details (Cols 6-12) -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="glass-card p-8 sm:p-10 rounded-3xl border border-slate-800 relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-40 h-40 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
+              
+              <h3 class="text-2xl sm:text-3xl font-bold font-outfit text-white mb-4">
+                Bridging Data Analysis, Business Understanding & Software Engineering
+              </h3>
+
+              <div class="space-y-4 text-slate-300 text-base sm:text-lg leading-relaxed">
+                <p>
+                  "I am currently pursuing a Bachelor of Computer Applications in Data Science at Alliance University, Bengaluru. My interests lie in data analysis, business analysis, machine learning, databases, and web development. Through academic projects, internships, certifications, and practical learning, I have developed experience working with data, building applications, creating reports, and communicating insights."
+                </p>
+              </div>
+
+              <!-- Key Core Highlights based strictly on user data -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 pt-6 border-t border-slate-800/80">
+                <div class="flex items-start gap-3.5">
+                  <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0 mt-0.5">
+                    <i class="fa-solid fa-chart-pie"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-semibold text-base">Data & Business Analytics</h4>
+                    <p class="text-slate-400 text-sm">Data modelling, trend visualization, market research, and decision-support reporting.</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3.5">
+                  <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0 mt-0.5">
+                    <i class="fa-solid fa-code"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-semibold text-base">Application Development</h4>
+                    <p class="text-slate-400 text-sm">Full-stack web applications with responsive UI, CRUD operations, and database integration.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 3: TECHNICAL EXPERTISE -->
+    <!-- ========================================== -->
+    <section id="skills" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-navy-900/30 border-t border-slate-800/60">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div class="section-badge">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>3D Skill Ecosystem</span>
+          </div>
+          <h2 class="section-title">Technical Expertise</h2>
+          <p class="section-subtitle">
+            A cohesive technology ecosystem organized around a central Data & Technology hub. No arbitrary percentage bars—only real, practical tools and frameworks.
+          </p>
+        </div>
+
+        <!-- 3D Interactive Ecosystem Canvas Display -->
+        <div class="mb-12 relative rounded-3xl glass-card p-6 border border-blue-500/20 overflow-hidden shadow-2xl">
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-slate-800 text-xs font-mono text-slate-400">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span>Central Core: Data & Technology Node</span>
+            </div>
+            <div class="text-slate-500">Interactive 3D Ecosystem Representation</div>
+          </div>
+
+          <div class="relative h-64 sm:h-80 w-full flex items-center justify-center">
+            <canvas id="skills-3d-canvas" class="w-full h-full"></canvas>
+            <div class="absolute pointer-events-none text-center">
+              <div class="w-24 h-24 rounded-full bg-blue-600/20 border border-blue-400/40 flex items-center justify-center backdrop-blur-md shadow-lg shadow-blue-500/20 mx-auto animate-pulse">
+                <div class="text-xs font-bold font-outfit text-white text-center leading-tight">
+                  DATA &amp;<br/><span class="text-cyan-400">TECH</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Four Floating Glass Cards for the 4 Categories -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Category 1: Programming & Data -->
+          <div class="glass-card p-6 rounded-2xl border border-blue-500/30 hover:border-blue-400/60 transition-all duration-300 tilt-card group">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-chart-column"></i>
+              </div>
+              <span class="text-[11px] font-mono text-blue-400 bg-blue-950/60 px-2 py-0.5 rounded-full border border-blue-900">01</span>
+            </div>
+            <h3 class="text-lg font-bold font-outfit text-white mb-3 group-hover:text-blue-300 transition-colors">Programming & Data</h3>
+            <p class="text-xs text-slate-400 mb-4">Core languages and libraries for exploratory analysis, statistics, and visualization.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag"><i class="fa-brands fa-python text-yellow-400 mr-1.5"></i>Python</span>
+              <span class="skill-tag"><i class="fa-solid fa-database text-blue-400 mr-1.5"></i>SQL</span>
+              <span class="skill-tag"><i class="fa-solid fa-table text-indigo-400 mr-1.5"></i>Pandas</span>
+              <span class="skill-tag"><i class="fa-solid fa-chart-line text-cyan-400 mr-1.5"></i>Matplotlib</span>
+              <span class="skill-tag"><i class="fa-solid fa-wave-square text-emerald-400 mr-1.5"></i>Seaborn</span>
+            </div>
+          </div>
+
+          <!-- Category 2: Web Development -->
+          <div class="glass-card p-6 rounded-2xl border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 tilt-card group">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-code"></i>
+              </div>
+              <span class="text-[11px] font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded-full border border-cyan-900">02</span>
+            </div>
+            <h3 class="text-lg font-bold font-outfit text-white mb-3 group-hover:text-cyan-300 transition-colors">Web Development</h3>
+            <p class="text-xs text-slate-400 mb-4">Responsive frontends, asynchronous client logic, and scalable server-side runtimes.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag"><i class="fa-brands fa-html5 text-orange-400 mr-1.5"></i>HTML</span>
+              <span class="skill-tag"><i class="fa-brands fa-css3-alt text-blue-400 mr-1.5"></i>CSS</span>
+              <span class="skill-tag"><i class="fa-brands fa-js text-yellow-300 mr-1.5"></i>JavaScript</span>
+              <span class="skill-tag"><i class="fa-brands fa-react text-cyan-400 mr-1.5"></i>ReactJS</span>
+              <span class="skill-tag"><i class="fa-brands fa-node-js text-emerald-400 mr-1.5"></i>Node.js</span>
+            </div>
+          </div>
+
+          <!-- Category 3: Database Management -->
+          <div class="glass-card p-6 rounded-2xl border border-emerald-500/30 hover:border-emerald-400/60 transition-all duration-300 tilt-card group">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-server"></i>
+              </div>
+              <span class="text-[11px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-900">03</span>
+            </div>
+            <h3 class="text-lg font-bold font-outfit text-white mb-3 group-hover:text-emerald-300 transition-colors">Database Management</h3>
+            <p class="text-xs text-slate-400 mb-4">Relational schema design and document-oriented NoSQL persistence stores.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag"><i class="fa-solid fa-leaf text-emerald-400 mr-1.5"></i>MongoDB</span>
+              <span class="skill-tag"><i class="fa-solid fa-database text-blue-400 mr-1.5"></i>MySQL</span>
+            </div>
+          </div>
+
+          <!-- Category 4: Tools & Technologies -->
+          <div class="glass-card p-6 rounded-2xl border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 tilt-card group">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-toolbox"></i>
+              </div>
+              <span class="text-[11px] font-mono text-purple-400 bg-purple-950/60 px-2 py-0.5 rounded-full border border-purple-900">04</span>
+            </div>
+            <h3 class="text-lg font-bold font-outfit text-white mb-3 group-hover:text-purple-300 transition-colors">Tools & Technologies</h3>
+            <p class="text-xs text-slate-400 mb-4">Modern developer environments, cloud infrastructure, and collaborative UI/UX tools.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag"><i class="fa-solid fa-code text-blue-400 mr-1.5"></i>VS Code</span>
+              <span class="skill-tag"><i class="fa-brands fa-github text-slate-300 mr-1.5"></i>GitHub</span>
+              <span class="skill-tag"><i class="fa-brands fa-aws text-amber-400 mr-1.5"></i>AWS</span>
+              <span class="skill-tag"><i class="fa-brands fa-microsoft text-blue-400 mr-1.5"></i>Microsoft Azure</span>
+              <span class="skill-tag"><i class="fa-brands fa-figma text-rose-400 mr-1.5"></i>Figma</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 4: PROJECT SHOWCASE -->
+    <!-- ========================================== -->
+    <section id="projects" class="py-24 px-4 sm:px-6 lg:px-8 relative border-t border-slate-800/60">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div class="section-badge">
+            <i class="fa-solid fa-diagram-project"></i>
+            <span>Interactive Portfolio</span>
+          </div>
+          <h2 class="section-title">Project Showcase</h2>
+          <p class="section-subtitle">
+            Authentic applications, machine learning models, and interface architectures built through coursework and independent technical exploration.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- PROJECT 1: Stock Market Prediction System -->
+          <div class="glass-card rounded-3xl border border-blue-500/30 overflow-hidden flex flex-col justify-between tilt-card group hover:shadow-2xl hover:shadow-blue-900/30 transition-all duration-300">
+            <!-- Project 3D Visual Header -->
+            <div class="relative h-48 bg-navy-900/80 border-b border-slate-800 flex items-center justify-center overflow-hidden p-4">
+              <canvas id="project-stock-canvas" class="w-full h-full"></canvas>
+              <!-- Overlay Pill -->
+              <div class="absolute top-3 left-3 bg-navy-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-blue-500/30 text-[11px] font-mono text-blue-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-chart-line text-blue-400"></i>
+                <span>ML & Predictive Analytics</span>
+              </div>
+            </div>
+
+            <!-- Project Details -->
+            <div class="p-6 flex flex-col flex-1 justify-between">
+              <div>
+                <h3 class="text-xl font-bold font-outfit text-white mb-2 group-hover:text-blue-400 transition-colors">
+                  Stock Market Prediction System
+                </h3>
+                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                  "Developed a machine learning model to analyze historical stock market data and predict market trends using data visualization and predictive analytics."
+                </p>
+              </div>
+
+              <div>
+                <!-- Technologies -->
+                <div class="flex flex-wrap gap-1.5 mb-5 pt-3 border-t border-slate-800">
+                  <span class="tech-badge">Python</span>
+                  <span class="tech-badge">Pandas</span>
+                  <span class="tech-badge">Matplotlib</span>
+                  <span class="tech-badge">Seaborn</span>
+                </div>
+
+                <button class="project-btn w-full" onclick="openProjectModal('stock')">
+                  <span>View Project Overview</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROJECT 2: Student Management System -->
+          <div class="glass-card rounded-3xl border border-emerald-500/30 overflow-hidden flex flex-col justify-between tilt-card group hover:shadow-2xl hover:shadow-emerald-900/30 transition-all duration-300">
+            <!-- Project 3D Visual Header -->
+            <div class="relative h-48 bg-navy-900/80 border-b border-slate-800 flex items-center justify-center overflow-hidden p-4">
+              <canvas id="project-student-canvas" class="w-full h-full"></canvas>
+              <!-- Overlay Pill -->
+              <div class="absolute top-3 left-3 bg-navy-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-emerald-500/30 text-[11px] font-mono text-emerald-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-database text-emerald-400"></i>
+                <span>CRUD & Database Integration</span>
+              </div>
+            </div>
+
+            <!-- Project Details -->
+            <div class="p-6 flex flex-col flex-1 justify-between">
+              <div>
+                <h3 class="text-xl font-bold font-outfit text-white mb-2 group-hover:text-emerald-400 transition-colors">
+                  Student Management System
+                </h3>
+                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                  "Developed a web-based application for managing student records with CRUD operations and database integration."
+                </p>
+              </div>
+
+              <div>
+                <!-- Technologies -->
+                <div class="flex flex-wrap gap-1.5 mb-5 pt-3 border-t border-slate-800">
+                  <span class="tech-badge">HTML</span>
+                  <span class="tech-badge">CSS</span>
+                  <span class="tech-badge">JavaScript</span>
+                  <span class="tech-badge">Node.js</span>
+                  <span class="tech-badge">MongoDB</span>
+                </div>
+
+                <button class="project-btn w-full" onclick="openProjectModal('student')">
+                  <span>View Project Overview</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROJECT 3: Meesho E-Commerce Website -->
+          <div class="glass-card rounded-3xl border border-cyan-500/30 overflow-hidden flex flex-col justify-between tilt-card group hover:shadow-2xl hover:shadow-cyan-900/30 transition-all duration-300">
+            <!-- Project 3D Visual Header -->
+            <div class="relative h-48 bg-navy-900/80 border-b border-slate-800 flex items-center justify-center overflow-hidden p-4">
+              <canvas id="project-ecommerce-canvas" class="w-full h-full"></canvas>
+              <!-- Overlay Pill -->
+              <div class="absolute top-3 left-3 bg-navy-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-cyan-500/30 text-[11px] font-mono text-cyan-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-cart-shopping text-cyan-400"></i>
+                <span>E-Commerce Frontend</span>
+              </div>
+            </div>
+
+            <!-- Project Details -->
+            <div class="p-6 flex flex-col flex-1 justify-between">
+              <div>
+                <h3 class="text-xl font-bold font-outfit text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                  Meesho E-Commerce Website
+                </h3>
+                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                  "Developed a responsive e-commerce website inspired by Meesho, focusing on product listings, user-friendly UI, and frontend functionality."
+                </p>
+              </div>
+
+              <div>
+                <!-- Technologies -->
+                <div class="flex flex-wrap gap-1.5 mb-5 pt-3 border-t border-slate-800">
+                  <span class="tech-badge">HTML</span>
+                  <span class="tech-badge">CSS</span>
+                  <span class="tech-badge">JavaScript</span>
+                </div>
+
+                <button class="project-btn w-full" onclick="openProjectModal('ecommerce')">
+                  <span>View Project Overview</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROJECT 4: Facebook and Instagram Login Page -->
+          <div class="glass-card rounded-3xl border border-indigo-500/30 overflow-hidden flex flex-col justify-between tilt-card group hover:shadow-2xl hover:shadow-indigo-900/30 transition-all duration-300">
+            <!-- Project 3D Visual Header -->
+            <div class="relative h-48 bg-navy-900/80 border-b border-slate-800 flex items-center justify-center overflow-hidden p-4">
+              <canvas id="project-login-canvas" class="w-full h-full"></canvas>
+              <!-- Overlay Pill -->
+              <div class="absolute top-3 left-3 bg-navy-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-indigo-500/30 text-[11px] font-mono text-indigo-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-lock text-indigo-400"></i>
+                <span>Authentication Concepts</span>
+              </div>
+            </div>
+
+            <!-- Project Details -->
+            <div class="p-6 flex flex-col flex-1 justify-between">
+              <div>
+                <h3 class="text-xl font-bold font-outfit text-white mb-2 group-hover:text-indigo-400 transition-colors">
+                  Facebook and Instagram Login Page
+                </h3>
+                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                  "Created responsive Facebook and Instagram-style login page concepts with form validation and modern UI styling."
+                </p>
+              </div>
+
+              <div>
+                <!-- Technologies -->
+                <div class="flex flex-wrap gap-1.5 mb-5 pt-3 border-t border-slate-800">
+                  <span class="tech-badge">HTML</span>
+                  <span class="tech-badge">CSS</span>
+                </div>
+
+                <button class="project-btn w-full" onclick="openProjectModal('social')">
+                  <span>View Project Overview</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROJECT 5: HTML Website Concepts -->
+          <div class="glass-card rounded-3xl border border-slate-700/60 overflow-hidden flex flex-col justify-between tilt-card group hover:shadow-2xl hover:shadow-blue-900/20 transition-all duration-300 md:col-span-2 lg:col-span-2">
+            <!-- Project 3D Visual Header: Three Small Previews -->
+            <div class="p-5 bg-navy-900/80 border-b border-slate-800">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+                  <i class="fa-solid fa-window-restore text-blue-400"></i>
+                  <span>3 Interface Concepts</span>
+                </span>
+                <span class="tech-badge">HTML &amp; Semantic Web</span>
+              </div>
+
+              <!-- 3 Previews Grid -->
+              <div class="grid grid-cols-3 gap-3">
+                <div class="rounded-xl bg-navy-950 p-3 border border-slate-800 text-center hover:border-blue-500/50 transition-colors">
+                  <i class="fa-solid fa-graduation-cap text-blue-400 text-lg mb-1"></i>
+                  <div class="text-[11px] font-semibold text-white">University</div>
+                  <div class="text-[9px] text-slate-500 font-mono">Login UI</div>
+                </div>
+                <div class="rounded-xl bg-navy-950 p-3 border border-slate-800 text-center hover:border-cyan-500/50 transition-colors">
+                  <i class="fa-solid fa-share-nodes text-cyan-400 text-lg mb-1"></i>
+                  <div class="text-[11px] font-semibold text-white">Social Media</div>
+                  <div class="text-[9px] text-slate-500 font-mono">Login UI</div>
+                </div>
+                <div class="rounded-xl bg-navy-950 p-3 border border-slate-800 text-center hover:border-amber-500/50 transition-colors">
+                  <i class="fa-solid fa-mug-hot text-amber-400 text-lg mb-1"></i>
+                  <div class="text-[11px] font-semibold text-white">Food Café</div>
+                  <div class="text-[9px] text-slate-500 font-mono">Login UI</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Details -->
+            <div class="p-6 flex flex-col flex-1 justify-between">
+              <div>
+                <h3 class="text-xl font-bold font-outfit text-white mb-2 group-hover:text-blue-400 transition-colors">
+                  HTML Website Concepts
+                </h3>
+                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                  "Built login page concepts for university, social media, and food café website interfaces."
+                </p>
+              </div>
+
+              <div class="pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="tech-badge">HTML</span>
+                  <span class="tech-badge">Semantic Layouts</span>
+                  <span class="tech-badge">Form Design</span>
+                </div>
+                <button class="project-btn" onclick="openProjectModal('concepts')">
+                  <span>View Project Overview</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 5: EXPERIENCE & LEADERSHIP -->
+    <!-- ========================================== -->
+    <section id="experience" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-navy-900/30 border-t border-slate-800/60">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div class="section-badge">
+            <i class="fa-solid fa-briefcase"></i>
+            <span>Professional Engagements</span>
+          </div>
+          <h2 class="section-title">Experience & Leadership</h2>
+          <p class="section-subtitle">Real-world internships in business analysis, data modeling, reporting, and youth sustainability leadership.</p>
+        </div>
+
+        <div class="space-y-12">
+          
+          <!-- EXPERIENCE 1: Business Analyst Intern -->
+          <div class="glass-card rounded-3xl p-8 sm:p-10 border border-blue-500/30 tilt-card relative overflow-hidden shadow-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              
+              <!-- Left: Description & Responsibilities (Cols 1-7) -->
+              <div class="lg:col-span-7 space-y-5">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <span class="text-xs font-mono uppercase text-blue-400 tracking-wider">Internship Experience</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold font-outfit text-white">Business Analyst Intern</h3>
+                    <div class="text-slate-300 font-medium text-base">Unified Mentor Pvt. Ltd.</div>
+                  </div>
+                  <div class="px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/40 text-blue-300 font-mono text-xs">
+                    June 2025 &ndash; July 2025
+                  </div>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                  <h4 class="text-sm font-semibold text-slate-200 uppercase tracking-wide font-mono">Key Responsibilities &amp; Contributions:</h4>
+                  <ul class="space-y-2.5 text-slate-300 text-sm sm:text-base leading-relaxed">
+                    <li class="flex items-start gap-3">
+                      <i class="fa-solid fa-check text-blue-400 text-sm mt-1 shrink-0"></i>
+                      <span>Developed data models to visualize trends and support business decisions.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <i class="fa-solid fa-check text-blue-400 text-sm mt-1 shrink-0"></i>
+                      <span>Prepared presentations and reports to communicate insights to management.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <i class="fa-solid fa-check text-blue-400 text-sm mt-1 shrink-0"></i>
+                      <span>Assisted in system implementation and troubleshot data issues to identify root causes.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <i class="fa-solid fa-check text-blue-400 text-sm mt-1 shrink-0"></i>
+                      <span>Gained hands-on experience with analytical tools and presentation development.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <i class="fa-solid fa-check text-blue-400 text-sm mt-1 shrink-0"></i>
+                      <span>Worked with datasets to identify trends and insights.</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Right: 3D Business Analytics Visual (Cols 8-12) -->
+              <div class="lg:col-span-5">
+                <div class="rounded-2xl bg-navy-950/80 border border-slate-800 p-5 flex flex-col justify-between h-72 relative overflow-hidden">
+                  <div class="flex items-center justify-between text-xs font-mono text-slate-400 border-b border-slate-800 pb-2">
+                    <span>3D Data Modeling &amp; Reports</span>
+                    <span class="text-blue-400"><i class="fa-solid fa-cube"></i> Interactive</span>
+                  </div>
+                  <canvas id="exp-analytics-canvas" class="w-full h-44"></canvas>
+                  <div class="text-[11px] text-center font-mono text-slate-400 bg-navy-900/60 py-1 rounded border border-slate-800/80">
+                    Decision Support &bull; Root Cause Troubleshooting &bull; Management Reporting
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- EXPERIENCE 2: 1 Million For 1 Billion — Green Intern -->
+          <div class="glass-card rounded-3xl p-8 sm:p-10 border border-emerald-500/30 tilt-card relative overflow-hidden shadow-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              
+              <!-- Left: Description & Contributions (Cols 1-7) -->
+              <div class="lg:col-span-7 space-y-5">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <span class="text-xs font-mono uppercase text-emerald-400 tracking-wider">Leadership Program</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold font-outfit text-white">Green Intern</h3>
+                    <div class="text-slate-300 font-medium text-base">1 Million For 1 Billion (1M1B)</div>
+                  </div>
+                  <div class="px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 font-mono text-xs">
+                    February 2026 &ndash; March 2026
+                  </div>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                  <p class="text-slate-300 text-sm sm:text-base leading-relaxed italic">
+                    "Selected through a competitive process for a leadership program recognizing high-potential youth committed to sustainability and climate action."
+                  </p>
+
+                  <h4 class="text-sm font-semibold text-slate-200 uppercase tracking-wide font-mono pt-2">Contributions &amp; Skills Developed:</h4>
+                  <ul class="space-y-2.5 text-slate-300 text-sm sm:text-base leading-relaxed">
+                    <li class="flex items-start gap-3">
+                      <i class="fa-solid fa-leaf text-emerald-400 text-sm mt-1 shrink-0"></i>
+                      <span>Collaborated with other young leaders on sustainability-focused initiatives.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <i class="fa-solid fa-leaf text-emerald-400 text-sm mt-1 shrink-0"></i>
+                      <span>Contributed actionable ideas towards climate action and community impact.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <i class="fa-solid fa-leaf text-emerald-400 text-sm mt-1 shrink-0"></i>
+                      <span>Developed core leadership, teamwork, communication, and problem-solving skills.</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Right: 3D Sustainability & Climate Visual (Cols 8-12) -->
+              <div class="lg:col-span-5">
+                <div class="rounded-2xl bg-navy-950/80 border border-slate-800 p-5 flex flex-col justify-between h-72 relative overflow-hidden">
+                  <div class="flex items-center justify-between text-xs font-mono text-slate-400 border-b border-slate-800 pb-2">
+                    <span>3D Eco-Sphere &bull; Collaboration</span>
+                    <span class="text-emerald-400"><i class="fa-solid fa-earth-americas"></i> Interactive</span>
+                  </div>
+                  <canvas id="exp-green-canvas" class="w-full h-44"></canvas>
+                  <div class="text-[11px] text-center font-mono text-slate-400 bg-navy-900/60 py-1 rounded border border-slate-800/80">
+                    Climate Action &bull; Youth Leadership &bull; Sustainable Innovation
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 6: ACADEMIC JOURNEY -->
+    <!-- ========================================== -->
+    <section id="education" class="py-24 px-4 sm:px-6 lg:px-8 relative border-t border-slate-800/60">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div class="section-badge">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Higher Education</span>
+          </div>
+          <h2 class="section-title">Academic Journey</h2>
+          <p class="section-subtitle">Dedicated undergraduate specialization in data science and computer applications.</p>
+        </div>
+
+        <!-- Single Comprehensive Degree Card -->
+        <div class="max-w-4xl mx-auto">
+          <div class="glass-card rounded-3xl p-8 sm:p-12 border border-blue-500/40 tilt-card relative overflow-hidden shadow-2xl">
+            <!-- Background Glow -->
+            <div class="absolute -top-20 -right-20 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              
+              <!-- Degree Details (Cols 1-8) -->
+              <div class="md:col-span-8 space-y-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/70 border border-blue-400/30 text-blue-300 font-mono text-xs">
+                  <i class="fa-solid fa-award"></i>
+                  <span>Undergraduate Degree Program</span>
+                </div>
+
+                <h3 class="text-2xl sm:text-4xl font-bold font-outfit text-white">
+                  Bachelor of Computer Applications &mdash; Data Science
+                </h3>
+
+                <div class="space-y-1">
+                  <div class="text-lg text-slate-200 font-medium">Alliance University</div>
+                  <div class="text-sm text-slate-400 font-mono">Bengaluru, Karnataka &bull; 2024 &ndash; 2027</div>
+                </div>
+
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed pt-2">
+                  Comprehensive academic curriculum integrating foundational computer applications, data structures, algorithms, data analysis, database management, machine learning, and modern software development practices.
+                </p>
+
+                <!-- Coursework Focus Areas -->
+                <div class="pt-4 border-t border-slate-800">
+                  <div class="text-xs uppercase tracking-wider text-slate-400 font-mono mb-2.5">Key Academic Domains:</div>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="skill-tag">Data Science</span>
+                    <span class="skill-tag">Data Analytics</span>
+                    <span class="skill-tag">Machine Learning</span>
+                    <span class="skill-tag">Database Management</span>
+                    <span class="skill-tag">Web Development</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Metrics & 3D Medal Graphic (Cols 9-12) -->
+              <div class="md:col-span-4 flex flex-col items-center justify-center p-6 rounded-2xl bg-navy-950/80 border border-blue-500/30 text-center space-y-3">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white text-2xl shadow-lg shadow-blue-500/30">
+                  <i class="fa-solid fa-medal"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Current Academic Score</div>
+                  <div class="text-4xl sm:text-5xl font-extrabold font-outfit text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500">
+                    7.67
+                  </div>
+                  <div class="text-xs font-mono text-cyan-400 mt-1">Cumulative GPA (CGPA)</div>
+                </div>
+                <div class="w-full pt-3 border-t border-slate-800 text-[11px] text-slate-400 font-mono">
+                  Verified Academic Standing
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 7: CERTIFICATIONS -->
+    <!-- ========================================== -->
+    <section id="certifications" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-navy-900/30 border-t border-slate-800/60">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div class="section-badge">
+            <i class="fa-solid fa-certificate"></i>
+            <span>Credentials &amp; Training</span>
+          </div>
+          <h2 class="section-title">Certifications & Learning</h2>
+          <p class="section-subtitle">
+            Authentic industry certifications and technical coursework completed across AI, machine learning, databases, cloud, and business analysis.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- CERT 1: AI Skills Passport -->
+          <a href="https://drive.google.com/file/d/1Guk605126jQRbjFff-X2FETzaNYssExh/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-2xl border border-blue-500/20 hover:border-blue-400/60 transition-all duration-300 tilt-card flex flex-col justify-between group cursor-pointer text-inherit no-underline">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-brain"></i>
+                </div>
+                <span class="text-xs text-slate-500 group-hover:text-blue-400 transition-colors">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+              </div>
+              <h3 class="text-base font-bold font-outfit text-white mb-2 leading-snug group-hover:text-blue-300 transition-colors">AI Skills Passport</h3>
+              <p class="text-xs text-blue-300 font-medium">EY and Microsoft</p>
+            </div>
+            <div class="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between text-[11px] font-mono">
+              <span class="text-emerald-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check text-xs"></i>
+                <span>Verified</span>
+              </span>
+              <span class="text-blue-400 group-hover:underline flex items-center gap-1">
+                <span>View Certificate</span>
+                <i class="fa-solid fa-chevron-right text-[9px]"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- CERT 2: Generative AI: Prompt Engineering Basics -->
+          <a href="https://www.coursera.org/account/accomplishments/verify/F2XQFPEPQLUL?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-2xl border border-purple-500/20 hover:border-purple-400/60 transition-all duration-300 tilt-card flex flex-col justify-between group cursor-pointer text-inherit no-underline">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <span class="text-xs text-slate-500 group-hover:text-purple-400 transition-colors">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+              </div>
+              <h3 class="text-base font-bold font-outfit text-white mb-2 leading-snug group-hover:text-purple-300 transition-colors">Generative AI: Prompt Engineering Basics</h3>
+              <p class="text-xs text-purple-300 font-medium">Coursera Credential</p>
+            </div>
+            <div class="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between text-[11px] font-mono">
+              <span class="text-emerald-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check text-xs"></i>
+                <span>Verified</span>
+              </span>
+              <span class="text-purple-400 group-hover:underline flex items-center gap-1">
+                <span>View Certificate</span>
+                <i class="fa-solid fa-chevron-right text-[9px]"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- CERT 3: Foundations of Machine Learning -->
+          <a href="https://www.coursera.org/account/accomplishments/verify/E1XBLCZNBYY2?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-2xl border border-cyan-500/20 hover:border-cyan-400/60 transition-all duration-300 tilt-card flex flex-col justify-between group cursor-pointer text-inherit no-underline">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <span class="text-xs text-slate-500 group-hover:text-cyan-400 transition-colors">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+              </div>
+              <h3 class="text-base font-bold font-outfit text-white mb-2 leading-snug group-hover:text-cyan-300 transition-colors">Foundations of Machine Learning</h3>
+              <p class="text-xs text-cyan-300 font-medium">Fractal Analytics &bull; Coursera</p>
+            </div>
+            <div class="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between text-[11px] font-mono">
+              <span class="text-emerald-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check text-xs"></i>
+                <span>Verified</span>
+              </span>
+              <span class="text-cyan-400 group-hover:underline flex items-center gap-1">
+                <span>View Certificate</span>
+                <i class="fa-solid fa-chevron-right text-[9px]"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- CERT 4: Introduction to Databases -->
+          <a href="https://www.coursera.org/account/accomplishments/verify/2S8PFMJ27N30?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-2xl border border-indigo-500/20 hover:border-indigo-400/60 transition-all duration-300 tilt-card flex flex-col justify-between group cursor-pointer text-inherit no-underline">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-xl group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-database"></i>
+                </div>
+                <span class="text-xs text-slate-500 group-hover:text-indigo-400 transition-colors">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+              </div>
+              <h3 class="text-base font-bold font-outfit text-white mb-2 leading-snug group-hover:text-indigo-300 transition-colors">Introduction to Databases</h3>
+              <p class="text-xs text-indigo-300 font-medium">Meta &bull; Coursera</p>
+            </div>
+            <div class="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between text-[11px] font-mono">
+              <span class="text-emerald-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check text-xs"></i>
+                <span>Verified</span>
+              </span>
+              <span class="text-indigo-400 group-hover:underline flex items-center gap-1">
+                <span>View Certificate</span>
+                <i class="fa-solid fa-chevron-right text-[9px]"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- CERT 5: Cloud Computing Fundamentals -->
+          <a href="https://www.coursera.org/account/accomplishments/verify/9IQQ77GKR89F?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-2xl border border-amber-500/20 hover:border-amber-400/60 transition-all duration-300 tilt-card flex flex-col justify-between group cursor-pointer text-inherit no-underline">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-cloud"></i>
+                </div>
+                <span class="text-xs text-slate-500 group-hover:text-amber-400 transition-colors">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+              </div>
+              <h3 class="text-base font-bold font-outfit text-white mb-2 leading-snug group-hover:text-amber-300 transition-colors">Cloud Computing Fundamentals</h3>
+              <p class="text-xs text-amber-300 font-medium">Coursera</p>
+            </div>
+            <div class="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between text-[11px] font-mono">
+              <span class="text-emerald-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check text-xs"></i>
+                <span>Verified</span>
+              </span>
+              <span class="text-amber-400 group-hover:underline flex items-center gap-1">
+                <span>View Certificate</span>
+                <i class="fa-solid fa-chevron-right text-[9px]"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- CERT 6: MongoDB Database Admin Path -->
+          <a href="https://drive.google.com/file/d/1Qzyup75-utELa4TXxEYRSHEteMZSu-Nb/view" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-2xl border border-emerald-500/20 hover:border-emerald-400/60 transition-all duration-300 tilt-card flex flex-col justify-between group cursor-pointer text-inherit no-underline">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-leaf"></i>
+                </div>
+                <span class="text-xs text-slate-500 group-hover:text-emerald-400 transition-colors">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+              </div>
+              <h3 class="text-base font-bold font-outfit text-white mb-2 leading-snug group-hover:text-emerald-300 transition-colors">MongoDB Database Admin Path</h3>
+              <p class="text-xs text-emerald-300 font-medium">Self-Managed</p>
+            </div>
+            <div class="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between text-[11px] font-mono">
+              <span class="text-emerald-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check text-xs"></i>
+                <span>Verified</span>
+              </span>
+              <span class="text-emerald-400 group-hover:underline flex items-center gap-1">
+                <span>View Certificate</span>
+                <i class="fa-solid fa-chevron-right text-[9px]"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- CERT 7: Natural Language Processing -->
+          <a href="https://www.coursera.org/account/accomplishments/verify/6EKUR308F5F7?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-2xl border border-blue-500/20 hover:border-blue-400/60 transition-all duration-300 tilt-card flex flex-col justify-between group cursor-pointer text-inherit no-underline">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-comments"></i>
+                </div>
+                <span class="text-xs text-slate-500 group-hover:text-blue-400 transition-colors">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+              </div>
+              <h3 class="text-base font-bold font-outfit text-white mb-2 leading-snug group-hover:text-blue-300 transition-colors">Natural Language Processing</h3>
+              <p class="text-xs text-blue-300 font-medium">Coursera</p>
+            </div>
+            <div class="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between text-[11px] font-mono">
+              <span class="text-emerald-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check text-xs"></i>
+                <span>Verified</span>
+              </span>
+              <span class="text-blue-400 group-hover:underline flex items-center gap-1">
+                <span>View Certificate</span>
+                <i class="fa-solid fa-chevron-right text-[9px]"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- CERT 8: Business Analyst Internship Certificate -->
+          <a href="https://drive.google.com/file/d/1SGzek1ZbZL6ACRNpSS_MTrFhckMunHiz/view" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-2xl border border-teal-500/20 hover:border-teal-400/60 transition-all duration-300 tilt-card flex flex-col justify-between group cursor-pointer text-inherit no-underline">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400 text-xl group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-chart-pie"></i>
+                </div>
+                <span class="text-xs text-slate-500 group-hover:text-teal-400 transition-colors">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
+              </div>
+              <h3 class="text-base font-bold font-outfit text-white mb-2 leading-snug group-hover:text-teal-300 transition-colors">Business Analyst Internship Certificate</h3>
+              <p class="text-xs text-teal-300 font-medium">Unified Mentor Pvt. Ltd.</p>
+            </div>
+            <div class="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between text-[11px] font-mono">
+              <span class="text-emerald-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check text-xs"></i>
+                <span>Verified</span>
+              </span>
+              <span class="text-teal-400 group-hover:underline flex items-center gap-1">
+                <span>View Certificate</span>
+                <i class="fa-solid fa-chevron-right text-[9px]"></i>
+              </span>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 8: CO-CURRICULAR & LEADERSHIP -->
+    <!-- ========================================== -->
+    <section id="leadership" class="py-24 px-4 sm:px-6 lg:px-8 relative border-t border-slate-800/60">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div class="section-badge">
+            <i class="fa-solid fa-users"></i>
+            <span>Impact &amp; Initiatives</span>
+          </div>
+          <h2 class="section-title">Beyond Academics</h2>
+          <p class="section-subtitle">Collaborative youth leadership, sustainability advocacy, and civic problem-solving.</p>
+        </div>
+
+        <div class="max-w-5xl mx-auto">
+          <div class="glass-card rounded-3xl p-8 sm:p-12 border border-emerald-500/30 tilt-card relative overflow-hidden shadow-2xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              
+              <!-- Spotlight Details (Cols 1-7) -->
+              <div class="lg:col-span-7 space-y-5">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-400/30 text-emerald-300 font-mono text-xs">
+                  <i class="fa-solid fa-seedling"></i>
+                  <span>Sustainability Leadership</span>
+                </div>
+
+                <h3 class="text-2xl sm:text-3xl font-bold font-outfit text-white">
+                  1 Million For 1 Billion &mdash; Green Intern
+                </h3>
+                <div class="text-sm font-mono text-slate-400">February 2026 &ndash; March 2026</div>
+
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  Demonstrated commitment to environmental sustainability and societal progress through competitive youth leadership engagement.
+                </p>
+
+                <!-- Core Pillars Developed -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 border-t border-slate-800">
+                  <div class="p-3 rounded-xl bg-navy-950/80 border border-slate-800 text-center">
+                    <i class="fa-solid fa-crown text-amber-400 text-base mb-1"></i>
+                    <div class="text-xs font-semibold text-white">Leadership</div>
+                  </div>
+                  <div class="p-3 rounded-xl bg-navy-950/80 border border-slate-800 text-center">
+                    <i class="fa-solid fa-people-group text-blue-400 text-base mb-1"></i>
+                    <div class="text-xs font-semibold text-white">Teamwork</div>
+                  </div>
+                  <div class="p-3 rounded-xl bg-navy-950/80 border border-slate-800 text-center">
+                    <i class="fa-solid fa-bullhorn text-cyan-400 text-base mb-1"></i>
+                    <div class="text-xs font-semibold text-white">Communication</div>
+                  </div>
+                  <div class="p-3 rounded-xl bg-navy-950/80 border border-slate-800 text-center">
+                    <i class="fa-solid fa-lightbulb text-yellow-400 text-base mb-1"></i>
+                    <div class="text-xs font-semibold text-white">Problem-Solving</div>
+                  </div>
+                  <div class="p-3 rounded-xl bg-navy-950/80 border border-slate-800 text-center col-span-2 sm:col-span-2">
+                    <i class="fa-solid fa-leaf text-emerald-400 text-base mb-1"></i>
+                    <div class="text-xs font-semibold text-white">Sustainability Awareness</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3D Collaboration / Sustainability Visual (Cols 8-12) -->
+              <div class="lg:col-span-5 flex justify-center">
+                <div class="w-full max-w-sm rounded-2xl bg-navy-950 p-5 border border-slate-800 flex flex-col items-center justify-between h-72">
+                  <div class="text-xs font-mono text-emerald-400 w-full flex items-center justify-between pb-2 border-b border-slate-800">
+                    <span>3D Climate &amp; Collaboration Node</span>
+                    <i class="fa-solid fa-globe"></i>
+                  </div>
+                  <canvas id="leadership-3d-canvas" class="w-full h-44"></canvas>
+                  <div class="text-[11px] font-mono text-slate-400 text-center">
+                    Youth Climate &bull; Collective Action
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 9: MY PROFESSIONAL FOCUS ("WHAT I BRING") -->
+    <!-- ========================================== -->
+    <section id="focus" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-navy-900/30 border-t border-slate-800/60">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div class="section-badge">
+            <i class="fa-solid fa-compass"></i>
+            <span>Value Proposition</span>
+          </div>
+          <h2 class="section-title">What I Bring</h2>
+          <p class="section-subtitle">
+            Four key capabilities grounded in practical experience, academic projects, and continuous skill development.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Card 1: Data & Analytics -->
+          <div class="glass-card p-8 rounded-3xl border border-blue-500/30 hover:border-blue-400/60 transition-all duration-300 tilt-card flex flex-col justify-between group">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-magnifying-glass-chart"></i>
+              </div>
+              <h3 class="text-xl font-bold font-outfit text-white mb-3 group-hover:text-blue-300 transition-colors">
+                DATA &amp; ANALYTICS
+              </h3>
+              <p class="text-slate-300 text-sm leading-relaxed">
+                Using Python, SQL, Pandas and visualization tools to understand data and identify insights.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-slate-800 mt-6">
+              <span class="text-xs font-mono text-blue-400">Analysis &bull; Exploration</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Business Analysis -->
+          <div class="glass-card p-8 rounded-3xl border border-teal-500/30 hover:border-teal-400/60 transition-all duration-300 tilt-card flex flex-col justify-between group">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-briefcase"></i>
+              </div>
+              <h3 class="text-xl font-bold font-outfit text-white mb-3 group-hover:text-teal-300 transition-colors">
+                BUSINESS ANALYSIS
+              </h3>
+              <p class="text-slate-300 text-sm leading-relaxed">
+                Experience with data modelling, reports, presentations and supporting data-driven decision-making.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-slate-800 mt-6">
+              <span class="text-xs font-mono text-teal-400">Reporting &bull; Strategy</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Web & Application Development -->
+          <div class="glass-card p-8 rounded-3xl border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 tilt-card flex flex-col justify-between group">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-laptop-code"></i>
+              </div>
+              <h3 class="text-xl font-bold font-outfit text-white mb-3 group-hover:text-cyan-300 transition-colors">
+                WEB &amp; APPLICATION DEVELOPMENT
+              </h3>
+              <p class="text-slate-300 text-sm leading-relaxed">
+                Experience building responsive interfaces and applications using HTML, CSS, JavaScript, ReactJS, Node.js and MongoDB.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-slate-800 mt-6">
+              <span class="text-xs font-mono text-cyan-400">Full-Stack &bull; UI/UX</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Continuous Learning -->
+          <div class="glass-card p-8 rounded-3xl border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 tilt-card flex flex-col justify-between group">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <h3 class="text-xl font-bold font-outfit text-white mb-3 group-hover:text-purple-300 transition-colors">
+                CONTINUOUS LEARNING
+              </h3>
+              <p class="text-slate-300 text-sm leading-relaxed">
+                Actively developing knowledge across machine learning, databases, cloud computing, NLP, generative AI and modern technologies.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-slate-800 mt-6">
+              <span class="text-xs font-mono text-purple-400">Curiosity &bull; Growth</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 10: PERSONAL PROJECT JOURNEY -->
+    <!-- ========================================== -->
+    <section id="journey" class="py-24 px-4 sm:px-6 lg:px-8 relative border-t border-slate-800/60">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div class="section-badge">
+            <i class="fa-solid fa-route"></i>
+            <span>Technical Progression</span>
+          </div>
+          <h2 class="section-title">Personal Project Journey</h2>
+          <p class="section-subtitle">
+            An evolutionary path showing progressive skill building from fundamental frontend markup to predictive analytics and business decision modeling.
+          </p>
+        </div>
+
+        <!-- 3D Progression Path Display -->
+        <div class="relative">
+          
+          <!-- Progression Steps Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-6 relative z-10">
+            
+            <!-- Stage 1 -->
+            <div class="journey-card glass-card p-6 rounded-2xl border border-blue-500/30 tilt-card text-center flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-mono font-bold flex items-center justify-center mx-auto mb-3 border border-blue-500/40">
+                  01
+                </div>
+                <h3 class="text-base font-bold font-outfit text-white mb-2">Web Development</h3>
+                <div class="text-xs font-mono text-blue-300 bg-navy-950 p-2 rounded-lg border border-slate-800">
+                  HTML &rarr; CSS &rarr; JavaScript
+                </div>
+              </div>
+              <p class="text-xs text-slate-400 mt-4 leading-relaxed">
+                Responsive layouts, form styling, and interactive client scripting.
+              </p>
+            </div>
+
+            <!-- Stage 2 -->
+            <div class="journey-card glass-card p-6 rounded-2xl border border-cyan-500/30 tilt-card text-center flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 font-mono font-bold flex items-center justify-center mx-auto mb-3 border border-cyan-500/40">
+                  02
+                </div>
+                <h3 class="text-base font-bold font-outfit text-white mb-2">Application Development</h3>
+                <div class="text-xs font-mono text-cyan-300 bg-navy-950 p-2 rounded-lg border border-slate-800">
+                  Node.js &rarr; MongoDB &rarr; CRUD
+                </div>
+              </div>
+              <p class="text-xs text-slate-400 mt-4 leading-relaxed">
+                Full-stack integration, backend routing, and persistent database storage.
+              </p>
+            </div>
+
+            <!-- Stage 3 -->
+            <div class="journey-card glass-card p-6 rounded-2xl border border-emerald-500/30 tilt-card text-center flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-mono font-bold flex items-center justify-center mx-auto mb-3 border border-emerald-500/40">
+                  03
+                </div>
+                <h3 class="text-base font-bold font-outfit text-white mb-2">Data &amp; Analytics</h3>
+                <div class="text-xs font-mono text-emerald-300 bg-navy-950 p-2 rounded-lg border border-slate-800">
+                  Python &rarr; Pandas &rarr; Matplotlib &rarr; Seaborn
+                </div>
+              </div>
+              <p class="text-xs text-slate-400 mt-4 leading-relaxed">
+                Data wrangling, exploratory data analysis, and statistical chart generation.
+              </p>
+            </div>
+
+            <!-- Stage 4 -->
+            <div class="journey-card glass-card p-6 rounded-2xl border border-purple-500/30 tilt-card text-center flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 font-mono font-bold flex items-center justify-center mx-auto mb-3 border border-purple-500/40">
+                  04
+                </div>
+                <h3 class="text-base font-bold font-outfit text-white mb-2">Machine Learning</h3>
+                <div class="text-xs font-mono text-purple-300 bg-navy-950 p-2 rounded-lg border border-slate-800">
+                  Historical data &rarr; Viz &rarr; Predictions
+                </div>
+              </div>
+              <p class="text-xs text-slate-400 mt-4 leading-relaxed">
+                Predictive modeling, regression analysis, and market trend forecasts.
+              </p>
+            </div>
+
+            <!-- Stage 5 -->
+            <div class="journey-card glass-card p-6 rounded-2xl border border-amber-500/30 tilt-card text-center flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 font-mono font-bold flex items-center justify-center mx-auto mb-3 border border-amber-500/40">
+                  05
+                </div>
+                <h3 class="text-base font-bold font-outfit text-white mb-2">Business Analysis</h3>
+                <div class="text-xs font-mono text-amber-300 bg-navy-950 p-2 rounded-lg border border-slate-800">
+                  Modelling &rarr; Reports &rarr; Decision Support
+                </div>
+              </div>
+              <p class="text-xs text-slate-400 mt-4 leading-relaxed">
+                Translating raw findings into actionable business presentations.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 11: CONTACT -->
+    <!-- ========================================== -->
+    <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-navy-900/30 border-t border-slate-800/60">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div class="section-badge">
+            <i class="fa-regular fa-paper-plane"></i>
+            <span>Get In Touch</span>
+          </div>
+          <h2 class="section-title">Let's Connect</h2>
+          <p class="section-subtitle">
+            "I’m open to internship opportunities, collaborative projects, and opportunities where I can apply my skills in data, technology, analytics, and business analysis."
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="glass-card rounded-3xl p-8 sm:p-12 border border-blue-500/40 tilt-card relative overflow-hidden shadow-2xl">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              
+              <!-- Direct Contact Details (Cols 1-7) -->
+              <div class="md:col-span-7 space-y-6">
+                <div>
+                  <h3 class="text-3xl font-bold font-outfit text-white">Prem Panchal</h3>
+                  <div class="text-sm font-mono text-blue-400 flex items-center gap-1.5 mt-1">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Mumbai, Maharashtra, India</span>
+                  </div>
+                </div>
+
+                <div class="space-y-4">
+                  <!-- Email Item -->
+                  <div class="flex items-center justify-between p-3.5 rounded-xl bg-navy-950/80 border border-slate-800 hover:border-blue-500/40 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center">
+                        <i class="fa-solid fa-envelope"></i>
+                      </div>
+                      <div>
+                        <div class="text-[11px] text-slate-400 font-mono">Email Address</div>
+                        <a href="mailto:prempanchal822@gmail.com" class="text-sm font-medium text-white hover:text-blue-400 transition-colors">
+                          prempanchal822@gmail.com
+                        </a>
+                      </div>
+                    </div>
+                    <button onclick="copyToClipboard('prempanchal822@gmail.com', this)" class="text-xs text-slate-400 hover:text-white p-2 rounded-lg bg-slate-800/60" title="Copy Email">
+                      <i class="fa-regular fa-copy"></i>
+                    </button>
+                  </div>
+
+                  <!-- Phone Item -->
+                  <div class="flex items-center justify-between p-3.5 rounded-xl bg-navy-950/80 border border-slate-800 hover:border-emerald-500/40 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                        <i class="fa-solid fa-phone"></i>
+                      </div>
+                      <div>
+                        <div class="text-[11px] text-slate-400 font-mono">Phone Number</div>
+                        <a href="tel:9653461841" class="text-sm font-medium text-white hover:text-emerald-400 transition-colors">
+                          9653461841
+                        </a>
+                      </div>
+                    </div>
+                    <button onclick="copyToClipboard('9653461841', this)" class="text-xs text-slate-400 hover:text-white p-2 rounded-lg bg-slate-800/60" title="Copy Phone">
+                      <i class="fa-regular fa-copy"></i>
+                    </button>
+                  </div>
+
+                  <!-- Resume PDF Download Card -->
+                  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-gradient-to-r from-navy-950 to-blue-950/40 border border-rose-500/30 hover:border-rose-400/60 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-lg bg-rose-500/10 text-rose-400 flex items-center justify-center">
+                        <i class="fa-solid fa-file-pdf"></i>
+                      </div>
+                      <div>
+                        <div class="text-[11px] text-slate-400 font-mono">Curriculum Vitae (PDF)</div>
+                        <div class="text-sm font-semibold text-white">Prem Panchal &mdash; Resume</div>
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <a href="assets/Prem_Panchal_Resume.pdf" target="_blank" rel="noopener noreferrer" class="project-btn text-xs !py-1.5 !px-3">
+                        <i class="fa-solid fa-eye"></i>
+                        <span>View</span>
+                      </a>
+                      <a href="assets/Prem_Panchal_Resume.pdf" download="Prem_Panchal_Resume.pdf" class="btn-primary !py-1.5 !px-3 text-xs !shadow-none">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Download</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Social & Professional Platforms (Cols 8-12) -->
+              <div class="md:col-span-5 flex flex-col gap-3">
+                <a href="https://linkedin.com/in/prem-panchal-702230258" target="_blank" rel="noopener noreferrer" class="social-contact-card group">
+                  <div class="w-10 h-10 rounded-xl bg-[#0077b5]/20 text-[#0077b5] flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs text-slate-400">LinkedIn Profile</div>
+                    <div class="text-sm font-semibold text-white group-hover:text-blue-400 transition-colors">prem-panchal-702230258</div>
+                  </div>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 ml-auto"></i>
+                </a>
+
+                <a href="https://github.com/Prem2309" target="_blank" rel="noopener noreferrer" class="social-contact-card group">
+                  <div class="w-10 h-10 rounded-xl bg-slate-800 text-white flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-github"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs text-slate-400">GitHub Profile</div>
+                    <div class="text-sm font-semibold text-white group-hover:text-slate-300 transition-colors">Prem2309</div>
+                  </div>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 ml-auto"></i>
+                </a>
+
+                <a href="https://www.hackerrank.com/prempanchal822" target="_blank" rel="noopener noreferrer" class="social-contact-card group">
+                  <div class="w-10 h-10 rounded-xl bg-[#00ea64]/20 text-[#00ea64] flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-hackerrank"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs text-slate-400">HackerRank Profile</div>
+                    <div class="text-sm font-semibold text-white group-hover:text-emerald-400 transition-colors">Prem Panchal &ndash; prempanchal822</div>
+                  </div>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 ml-auto"></i>
+                </a>
+
+                <a href="https://leetcode.com/prempanchal23" target="_blank" rel="noopener noreferrer" class="social-contact-card group">
+                  <div class="w-10 h-10 rounded-xl bg-[#ffa116]/20 text-[#ffa116] flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-code"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs text-slate-400">LeetCode Profile</div>
+                    <div class="text-sm font-semibold text-white group-hover:text-amber-400 transition-colors">prempanchal23</div>
+                  </div>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 ml-auto"></i>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FINAL SECTION: CLOSING STATEMENT & FOOTER -->
+    <!-- ========================================== -->
+    <footer class="py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-800 relative z-10 bg-navy-950 text-center">
+      <div class="max-w-4xl mx-auto space-y-4">
+        <div class="w-12 h-12 rounded-2xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 text-xl mx-auto mb-4">
+          <i class="fa-solid fa-terminal"></i>
+        </div>
+        
+        <p class="text-xl sm:text-2xl font-outfit font-semibold text-white tracking-tight">
+          "Turning data, technology and ideas into practical solutions."
+        </p>
+
+        <p class="text-sm font-mono text-cyan-400">
+          Prem Panchal | BCA Data Science
+        </p>
+
+        <div class="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          <div>Alliance University &bull; Bengaluru, Karnataka</div>
+          <div>&copy; 2026 Prem Panchal. All rights reserved.</div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Project Overview Modal -->
+  <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+    <div class="glass-card max-w-2xl w-full rounded-3xl border border-blue-500/40 p-6 sm:p-8 shadow-2xl relative">
+      <button onclick="closeProjectModal()" class="absolute top-6 right-6 w-9 h-9 rounded-full bg-slate-800/80 text-slate-400 hover:text-white flex items-center justify-center border border-slate-700">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="modal-content">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification for Copy -->
+  <div id="copy-toast" class="fixed bottom-6 right-6 z-50 bg-blue-600 text-white px-4 py-2.5 rounded-xl shadow-xl text-xs font-mono hidden items-center gap-2">
+    <i class="fa-solid fa-check"></i>
+    <span id="toast-message">Copied to clipboard!</span>
+  </div>
+
+  <!-- JavaScript Scripts -->
+  <script src="js/three-background.js"></script>
+  <script src="js/three-visuals.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
